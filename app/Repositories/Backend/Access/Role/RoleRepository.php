@@ -222,4 +222,6 @@ class RoleRepository extends BaseRepository
 
         return $this->query()->where('name', config('access.users.default_role'))->first();
     }
+
+
 }

@@ -33,13 +33,22 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
      * Note: Administrator has all permissions so you do not have to specify the administrator role everywhere.
      */
     includeRouteFiles(__DIR__.'/Backend/');
+
 });
 
 
 /**
  * Teamwork routes
  */
-Route::group(['prefix' => 'admin/teams', 'namespace' => 'Teamwork'], function()
+Route::group(['prefix' => 'admin/teams', 'namespace' => 'Teamwork', 'middleware' => 'admin'], function()
 {
      includeRouteFiles(__DIR__.'/Backend/Team/');
+});
+
+/**
+ * Messenger routes
+ */
+Route::group(['prefix' => 'admin/messaging', 'namespace' => 'Backend', 'middleware' => 'admin'], function()
+{
+     includeRouteFiles(__DIR__.'/Backend/Messenger/');
 });

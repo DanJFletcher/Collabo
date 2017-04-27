@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Teamwork;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
+use App\Models\Access\User\User;
+
 
 class TeamController extends Controller
 {
@@ -74,6 +76,21 @@ class TeamController extends Controller
 
         return redirect(route('teams.index'));
     }
+    public function seeTeam($id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($id);
+
+        return view('teamwork.show')->withTeam($team);
+    }
+    public function joinTeam(Request $request)
+    {
+
+        $id = $request->id;
+        $user = User::whereId(\Auth::user()->id)->first();
+        $user->teams()->attach($id);
+
+   }
 
     /**
      * Show the form for editing the specified resource.

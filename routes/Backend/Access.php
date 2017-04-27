@@ -31,6 +31,7 @@ Route::group([
              * User CRUD
              */
             Route::resource('user', 'UserController');
+            Route::get('members','UserController@members' )->name('members');
 
             /*
              * Specific User

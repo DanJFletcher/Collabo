@@ -1,0 +1,5 @@
+- Finish up donation where users can create donations
+- Left 5hrs on audio book
+- Add Ability for users to join and leave team
+- Boilerplate is build ona respository style
+

@@ -35,4 +35,8 @@ trait UserRelationship
     {
         return $this->hasMany(Session::class);
     }
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }

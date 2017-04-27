@@ -40,6 +40,20 @@
                         </div><!--col-md-6-->
                     </div><!--form-group-->
 
+                    <div class="form-group">
+                        {{ Form::label('address', 'Address', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::input('address', 'address', null, ['class' => 'form-control', 'placeholder' => 'Address']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                     <div class="form-group">
+                        {{ Form::label('phone', 'Phone', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::input('phone', 'phone', null, ['class' => 'form-control', 'placeholder' => 'Phone']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
                     @if (config('access.captcha.registration'))
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

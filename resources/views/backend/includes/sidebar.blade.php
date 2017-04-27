@@ -37,6 +37,13 @@
                 </a>
             </li>
             
+            <li class="{{ active_class(Active::checkUriPattern('admin/donations')) }}"> {{-- Set Active--}}
+                <a href="{{ route('admin.donations') }}"> {{-- Route --}}
+                    <i class="fa fa-money"></i> {{-- Icon --}}
+                    <span>Donations</span> {{-- Name of link--}}
+                </a>
+            </li>
+
             <li class="{{ active_class(Active::checkUriPattern('admin/teams')) }}"> {{-- Set Active--}}
                 <a href="{{route('teams.index')}}"> {{-- Route --}}
                     <i class="fa fa-users"></i> {{-- Icon --}}
@@ -44,23 +51,25 @@
                 </a>
             </li>
             
-            <li class=""> {{-- Set Active--}}
-                <a href=""> {{-- Route --}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/messaging')) }}"> {{-- Set Active--}}
+                <a href="{{route('messenger.index')}}"> {{-- Route --}}
                     <i class="fa fa-comments"></i> {{-- Icon --}}
                     <span>Messaging</span> {{-- Name of link--}}
                 </a>
             </li>
             
-            
-            
-             <li class="{{ active_class(Active::checkUriPattern('admin/dashboard')) }}"> {{-- Set Active--}}
-                <a href="{{ route('admin.dashboard') }}"> {{-- Route --}}
-                    <i class="fa fa-money"></i> {{-- Icon --}}
-                    <span>{{ trans('menus.backend.sidebar.payments') }}</span> {{-- Name of link--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/access/members')) }}"> {{-- Set Active--}}
+                <a href="{{ route('admin.access.members') }}"> {{-- Route --}}
+                    <i class="fa fa-user-circle-o"></i> {{-- Icon --}}
+                    <span>Members</span> {{-- Name of link--}}
                 </a>
             </li>
+
+
+
+
             @role(1)
-            <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
+            <li class="header">Admin</li>
 
             
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
@@ -109,6 +118,58 @@
                     </li>
                 </ul>
             </li>
+
+
+
+          <!--  Custom  -->
+
+            <li class=" treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>News</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu " style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
+                        <a href="{{ route('log-viewer::dashboard') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Create / Edit</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="">
+                            <i class="fa fa-circle-o"></i>
+                            <span>View</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" treeview">
+                <a href="#">
+                    <i class="fa fa-calendar"></i>
+                    <span>Events</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu " style="display: none; {{ active_class(Active::checkUriPattern(''), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('')) }}">
+                        <a href="">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Create</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="">
+                            <i class="fa fa-circle-o"></i>
+                            <span>View</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
             @endauth
 
            

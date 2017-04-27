@@ -56,6 +56,21 @@ class TeamMemberController extends Controller
         return redirect(route('teams.index'));
     }
 
+
+    public function leave($team_id, $user_id)
+    {
+       $teamModel = config('teamwork.team_model');
+       $team = $teamModel::findOrFail($team_id);
+
+       $userModel = config('teamwork.user_model');
+       $user = $userModel::findOrFail($user_id);
+
+       $user->detachTeam($team);
+
+       return redirect(route('teams.index'));
+
+    }
+
     /**
      * @param Request $request
      * @param int $team_id

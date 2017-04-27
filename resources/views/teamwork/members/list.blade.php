@@ -38,6 +38,7 @@
                         </table>
                     </div>
                 </div>
+                  @if(auth()->user()->isOwnerOfTeam($team))
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">Pending invitations</div>
                     <div class="panel-body">
@@ -86,13 +87,14 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-envelope-o"></i>Invite to Team
+                                        <i class="fa fa-btn fa-envelope-o"></i> Invite to Team
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
