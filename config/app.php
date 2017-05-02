@@ -188,6 +188,9 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Mpociot\Teamwork\TeamworkServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Nahid\Talk\TalkServiceProvider::class,
+        Vinkla\Pusher\PusherServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -262,7 +265,8 @@ return [
         'Gravatar'    => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Html'        => Collective\Html\HtmlFacade::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
-        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Stripe'      => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Talk'        => Nahid\Talk\Facades\Talk::class,
 
     ],
 

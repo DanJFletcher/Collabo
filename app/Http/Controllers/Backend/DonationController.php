@@ -13,7 +13,8 @@ class DonationController extends Controller
 {
     public function index()
     {
-        $customers = Customer::orderBy('id','desc')->take(5)->get();
+        $id = \Auth::user()->id;
+        $customers = Customer::orderBy('id','desc')->whereId($id)->take(5)->get();
         return view('backend.donations.index', compact('customers'));
 
 

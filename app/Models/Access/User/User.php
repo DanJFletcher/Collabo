@@ -11,6 +11,7 @@ use App\Models\Access\User\Traits\UserSendPasswordReset;
 use App\Models\Access\User\Traits\Attribute\UserAttribute;
 use App\Models\Access\User\Traits\Relationship\UserRelationship;
 use Mpociot\Teamwork\Traits\UserHasTeams;
+use YoHang88\LetterAvatar\LetterAvatar;
 
 /**
  * Class User.
@@ -59,5 +60,11 @@ class User extends Authenticatable
     {
         parent::__construct($attributes);
         $this->table = config('access.users_table');
+    }
+    
+     public function getAvatarAttribute()
+    {
+        return new LetterAvatar($this->name);
+
     }
 }

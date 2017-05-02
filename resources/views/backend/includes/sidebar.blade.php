@@ -5,7 +5,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ access()->user()->picture }}" class="img-circle" alt="User Image" />
+<!--         <img src="{{ access()->user()->picture }}" class="img-circle" alt="User Image" />-->
+                 <img src="{{ access()->user()->avatar}}" >
             </div><!--pull-left-->
             <div class="pull-left info">
                 <p>{{ access()->user()->name }}</p>
@@ -51,15 +52,15 @@
                 </a>
             </li>
             
-            <li class="{{ active_class(Active::checkUriPattern('admin/messaging')) }}"> {{-- Set Active--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/messaging/*')) }}"> {{-- Set Active--}}
                 <a href="{{route('messenger.index')}}"> {{-- Route --}}
                     <i class="fa fa-comments"></i> {{-- Icon --}}
                     <span>Messaging</span> {{-- Name of link--}}
                 </a>
             </li>
             
-            <li class="{{ active_class(Active::checkUriPattern('admin/access/members')) }}"> {{-- Set Active--}}
-                <a href="{{ route('admin.access.members') }}"> {{-- Route --}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/members')) }}"> {{-- Set Active--}}
+                <a href="{{ route('admin.members.index') }}"> {{-- Route --}}
                     <i class="fa fa-user-circle-o"></i> {{-- Icon --}}
                     <span>Members</span> {{-- Name of link--}}
                 </a>
@@ -123,49 +124,57 @@
 
           <!--  Custom  -->
 
-            <li class=" treeview">
+            <li class="{{ active_class(Active::checkUriPattern('admin/news*')) }}  treeview">
                 <a href="#">
                     <i class="fa fa-newspaper-o"></i>
                     <span>News</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu " style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('log-viewer::dashboard') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>Create / Edit</span>
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a href="">
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/news*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/news*'), 'display: block;') }}">
+                    
+                    <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
+                        <a href="{{route('admin.news.index')}}">
                             <i class="fa fa-circle-o"></i>
                             <span>View</span>
                         </a>
                     </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/news/create')) }}">
+                        <a href="{{ route('admin.news.create') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Create</span>
+                        </a>
+                    </li>
+
+                    
                 </ul>
             </li>
+            
+       
 
-            <li class=" treeview">
+            <li class="{{ active_class(Active::checkUriPattern('admin/events*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-calendar"></i>
                     <span>Events</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu " style="display: none; {{ active_class(Active::checkUriPattern(''), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('')) }}">
+                <ul class="treeview-menu treeview-menu {{ active_class(Active::checkUriPattern('admin/events*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/events*'), 'display: block;') }}">
+                    
+                    <li class="{{ active_class(Active::checkUriPattern('admin/events')) }}">
+                        <a href="{{route('admin.events.index')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>View</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="{{ active_class(Active::checkUriPattern('admin/events/create')) }}">
                         <a href="">
                             <i class="fa fa-circle-o"></i>
                             <span>Create</span>
                         </a>
                     </li>
 
-                    <li class="">
-                        <a href="">
-                            <i class="fa fa-circle-o"></i>
-                            <span>View</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 

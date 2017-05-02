@@ -22,19 +22,7 @@
             
         </div><!-- /.box-body -->
     </div><!--box box-success-->
-    @role(1)
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('history.backend.recent_history') }}</h3>
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div><!-- /.box tools -->
-        </div><!-- /.box-header -->
-        <div class="box-body">
-            {!! history()->render() !!}
-        </div><!-- /.box-body -->
-    </div><!--box box-success-->
-    @endauth
+   
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">NEWS (YOU CAN VIEW ALL THE NEWS ON YOUR PAGE)</h3>
@@ -61,4 +49,19 @@
             <p>Here you'll find all the latest events</p>
         </div><!-- /.box-body -->
     </div><!--box box-success-->
+
+
+ @role(1)
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ trans('history.backend.recent_history') }}</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div><!-- /.box tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body">
+            {!! history()->render() !!}
+        </div><!-- /.box-body -->
+    </div><!--box box-success-->
+    @endauth
 @endsection

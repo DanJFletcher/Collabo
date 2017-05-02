@@ -45,11 +45,7 @@ class UserController extends Controller
         return view('backend.access.index');
     }
 
-    public function members(ManageUserRequest $request)
-    {
-        return view('backend.access.members');
-    }
-
+    
     /**
      * @param ManageUserRequest $request
      *

@@ -16,15 +16,19 @@
                 <?php Session::forget('error');?>
                 @endif
 <!-- <button onclick="showDonation()" class="btn btn-success">Add Donation</button><br><br>-->
-<button class="btn btn-success" data-toggle="collapse" data-target="#donation-form">Add Donation</button>
+<button class="btn btn-success add-donor" id="add-donation" data-toggle="collapse" data-target="#donation-form">Add Donation</button>
 <button class="btn btn-success" data-toggle="collapse" data-target="#donation-form">Paypal</button><br><br>
+
+
 
  <div class="box box-success collapse"  id="donation-form">
         <div class="box-header with-border">
             <h3 class="box-title">Donation Form</h3>
+<!--
             <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div><!-- /.box tools -->
+            </div>
+-->
         </div><!-- /.box-header -->
         <div class="box-body">
 
@@ -195,13 +199,9 @@
     </div><!--box box-success-->
 
 
-
-
-
-
     <div class="box box-info  ">
         <div class="box-header with-border">
-            <h3 class="box-title">Recent Donations</h3>
+            <h3 class="box-title">Recent User Donations</h3>
             <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div><!-- /.box tools -->
@@ -218,6 +218,16 @@
 </div>
         </div><!-- /.box-body -->
     </div><!--box box-success-->
+
+<div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Recent Team Donations</h3>
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+            
+        </div><!-- /.box-body -->
+    </div><!--box-->
 
 @endsection
 @section('after-scripts')
@@ -236,6 +246,14 @@ $(document).ready(function(){
     $("#donate-amount").on("change keypress input", function() {
         $("#donate-button").text( $("#donate-amount").val() );
     });
+});
+    
+    
+    $('button#add-donation').click(function(){ //you can give id or class name here for $('button')
+    $(this).text(function(i,old){
+        return old=='Add Donation' ?  'Close Form' : 'Add Donation';
+    });
+    $(this).toggleClass("btn-danger");
 });
 
 </script>

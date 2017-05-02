@@ -46,9 +46,25 @@ Route::group(['prefix' => 'admin/teams', 'namespace' => 'Teamwork', 'middleware'
 });
 
 /**
+* Members route
+*/
+
+Route::group(['prefix' => 'admin/members', 'namespace' => 'Backend', 'as' => 'admin.', 'middleware' => 'admin'], function()
+{
+     includeRouteFiles(__DIR__.'/Backend/Members/');
+});
+
+
+
+/**
  * Messenger routes
  */
 Route::group(['prefix' => 'admin/messaging', 'namespace' => 'Backend', 'middleware' => 'admin'], function()
 {
      includeRouteFiles(__DIR__.'/Backend/Messenger/');
+});
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::','namespace' => 'Backend','middleware' => 'admin'], function() {
+   Route::post('message/send', 'MessengerController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessengerController@ajaxDeleteMessage')->name('message.delete');
 });

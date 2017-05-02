@@ -12,6 +12,12 @@ Breadcrumbs::register('teams.index', function ($breadcrumbs) {
 Breadcrumbs::register('messenger.index', function ($breadcrumbs) {
     $breadcrumbs->push('Messenger', route('messenger.index'));
 });
+Breadcrumbs::register('admin.members.index', function ($breadcrumbs) {
+    $breadcrumbs->push('Members', route('admin.members.index'));
+});
+Breadcrumbs::register('admin.events.index', function ($breadcrumbs) {
+    $breadcrumbs->push('Events', route('admin.events.index'));
+});
 
 
 require __DIR__.'/Search.php';
