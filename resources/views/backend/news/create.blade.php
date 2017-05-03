@@ -18,7 +18,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+<!--            <form role="form" method="post" action="{{route('admin.news.create_post')}}">-->
+
+                {{ Form::open(['route' => 'admin.news.create_post']) }}
               <div class="box-body">
                 <div class="form-group">
                   <label for="new_title">Title</label>
@@ -62,7 +64,11 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-success pull-right">Submit</button>
               </div>
-            </form>
+
+               {{ Form::close() }}
+<!--            </form>-->
+
+
           </div>
 @section('after-scripts')
      <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>

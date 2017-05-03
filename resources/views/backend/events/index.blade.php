@@ -38,32 +38,47 @@
         </li>
 -->
 
-        
-
+      @foreach($events as $event)
+            <?php
+            $date_of_event = $event->date_of_event;
+            $event_day = explode(' ',trim($date_of_event));
+            $event_month = $event_day[0];
+            $event_date = $event_day[1];
+            ?>
         <li>
-          <time datetime="2014-07-31 1600">
-            <span class="day">31</span>
-            <span class="month">Jan</span>
+          <time datetime="2017-07-31 1600">
+            <span class="day">{{$event_date}}</span>
+            <span class="month">{{$event_month }}</span>
+<!--
             <span class="year">2014</span>
             <span class="time">4:00 PM</span>
-          </time>         
+-->
+          </time>
+
           <div class="info">
-            <h2 class="title">Event Name</h2>
-            <p class="desc"> Event Info</p>
+            <h2 class="title">{{$event->title}}</h2>
+              <div>{!!$event->description!!}</div>
+
             <ul>
-              <li style="width:23%;"><span class="fa fa-money"></span> $ Goal </li>
-                <li style="width:24%;" id="clockdiv"><span class="days"></span> <span class="hours"></span> <span class="minutes"></span> <span class="seconds"></span></li>
-                
+              <li style="width:23%;"><span class="fa fa-money"></span> $ {{(float)$event->goal_amount}} </li>
+                <li style="width:24%;" id="clockdiv-{{$event->id}}" class="mystyle"><span class="days"></span> <span class="hours"></span> <span class="minutes"></span> <span class="seconds"></span></li>
+
             </ul>
           </div>
           <div class="social">
             <ul>
-              <li class="facebook" style="width:33%;"><a href="#facebook">Link</a></li>
-              <li class="twitter" style="width:34%;"><a href="#twitter">Link</a></li>
-              <li class="google-plus" style="width:33%;"><a href="#google-plus">Link</a></li>
+              <li class="facebook" style="width:33%;"><a href="#facebook">View</a></li>
+              <li class="twitter" style="width:34%;"><a href="#twitter">Edit</a></li>
+              <li class="google-plus" style="width:33%;"><a href="#google-plus">Delete</a></li>
             </ul>
           </div>
         </li>
+
+
+
+
+
+          @endforeach
       </ul>
     </div>
   </div>
@@ -74,57 +89,30 @@
 
 
 @section('after-scripts')
+
+   <script>
+  // Loop Through date and Match Id
+  @foreach ($events as $event)
+
+      initializeClock('clockdiv-{{$event->id}}', '{{ $event->date_of_event }}');
+
+   @endforeach
+</script>
 <script>
 
 
 
 
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
-
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
-
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
-
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
 
     
     
-var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-initializeClock('clockdiv', deadline);
+//var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+
 
 
 </script>
+
+
 
 @endsection
 

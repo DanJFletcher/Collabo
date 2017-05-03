@@ -8,14 +8,17 @@ use Cartalyst\Stripe\Stripe;
 use Stripe\Error\Card;
 use App\Models\Dashboard\Payment\Customer;
 use App\Notifications\DonationMade;
+use App\Models\Dashboard\Total;
+
 
 class DonationController extends Controller
 {
     public function index()
     {
         $id = \Auth::user()->id;
-        $customers = Customer::orderBy('id','desc')->whereId($id)->take(5)->get();
-        return view('backend.donations.index', compact('customers'));
+        $customers = Customer::orderBy('id','desc')->where('user_id', $id)->take(5)->get();
+
+          return view('backend.donations.index', compact('customers'));
 
 
     }
@@ -53,6 +56,7 @@ class DonationController extends Controller
                     $customer = new $customers;
                     $customer->team_id = $request->team_id;
                     $customer->user_id = $request->user_id;
+                    $customer->event_id = 5;
                     $customer->name = $request->name;
                     $customer->email = $request->email;
                     $customer->address = $request->address;
@@ -73,15 +77,25 @@ class DonationController extends Controller
                     */
 
 
+                    if($customer)
+                    {
+                      $event_total = Customer::orderBy('id','desc')->where('team_id', $customer->team_id)->get();
+
+                      \DB::table('totals')
+                      ->where('event_id',  $customer->event_id)
+                      ->update(['total_donations' => $event_total->sum('amount')]);
+                    }
+
+
                     \Session::put('success','Donation was successful');
                     return redirect()->back();
                 } else {
-                    \Session::put('error','Money not add in wallet!!');
+                    \Session::put('error','Donation was unsuccessful!!');
                     return redirect()->back();
                 }
-                    /**
-                    * Start to Catch Errors
-                    */
+            /**
+            * Start to Catch Errors
+            */
              } catch (Exception $e) {
                 \Session::put('error',$e->getMessage());
                 return redirect()->back();
@@ -95,3 +109,11 @@ class DonationController extends Controller
 
     }
 }
+
+
+
+//                           $sum = $customers->sum('amount');
+//        $total = 0;
+//        $total += $customers->amount;
+ //       $entry->view_count = $entry->view_count +1;
+//        dd($sum);

@@ -191,6 +191,7 @@ return [
         Nahid\Talk\TalkServiceProvider::class,
         Vinkla\Pusher\PusherServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -267,6 +268,7 @@ return [
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
         'Stripe'      => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Talk'        => Nahid\Talk\Facades\Talk::class,
+        'Purifier'    => Mews\Purifier\Facades\Purifier::class,
 
     ],
 

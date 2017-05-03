@@ -20,6 +20,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.*",
+        "mews/purifier": "^2.0",
         "mpociot/teamwork": "~5.0",
         "nahid/talk": "^2.2",
         "unisharp/laravel-ckeditor": "^4.6",

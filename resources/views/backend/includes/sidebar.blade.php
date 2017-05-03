@@ -168,7 +168,7 @@
                     
                     
                     <li class="{{ active_class(Active::checkUriPattern('admin/events/create')) }}">
-                        <a href="">
+                        <a href="{{route('admin.events.create')}}">
                             <i class="fa fa-circle-o"></i>
                             <span>Create</span>
                         </a>

@@ -79,8 +79,8 @@ class SocialLoginController extends Controller
         if (! $user->isActive()) {
             throw new GeneralException(trans('exceptions.frontend.auth.deactivated'));
         }
-
-        // User has been successfully created or already exists
+  /*Not Excuting Code*/
+         // User has been successfully created or already exists
         access()->login($user, true);
 
         // Throw an event in case you want to do anything when the user logs in
@@ -91,6 +91,7 @@ class SocialLoginController extends Controller
 
         // Return to the intended url or default to the class property
         return redirect()->intended(route('frontend.index'));
+
     }
 
     /**

@@ -49,6 +49,7 @@
 
                     <div class="row text-center">
                         {!! $socialite_links !!} 
+
                     </div>
                 </div><!-- panel body -->
 
