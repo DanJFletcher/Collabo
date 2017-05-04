@@ -9,16 +9,23 @@ use Stripe\Error\Card;
 use App\Models\Dashboard\Payment\Customer;
 use App\Notifications\DonationMade;
 use App\Models\Dashboard\Total;
+use App\Models\Dashboard\Event;
+use Auth;
 
 
 class DonationController extends Controller
 {
     public function index()
     {
-        $id = \Auth::user()->id;
+        $id = Auth::user()->id;
+        $team_id = Auth::user()->currentTeam->id;
         $customers = Customer::orderBy('id','desc')->where('user_id', $id)->take(5)->get();
+        $team_donations = Customer::orderBy('id','desc')->where('team_id', $team_id)->simplePaginate(5);
 
-          return view('backend.donations.index', compact('customers'));
+          return view('backend.donations.index', compact('customers','team_donations'));
+//        $event = Event::all();
+//        return $event;
+//
 
 
     }

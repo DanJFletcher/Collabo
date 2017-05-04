@@ -39,4 +39,17 @@ trait UserRelationship
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    // Get Current Event
+//     public function getCurrentEvent()
+//    {
+//        return $this->hasOne(Event::class, 'id','current_event_id');
+//    }
+
+
 }

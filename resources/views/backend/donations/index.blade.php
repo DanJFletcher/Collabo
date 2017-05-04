@@ -199,6 +199,8 @@
     </div><!--box box-success-->
 
 
+
+
     <div class="box box-info  ">
         <div class="box-header with-border">
             <h3 class="box-title">Recent User Donations</h3>
@@ -225,8 +227,19 @@
         </div><!-- /.box-header -->
 
         <div class="box-body">
+        @if(count($team_donations) > 0)
+        @foreach($team_donations as $donation)
+             <a href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">${{$donation->amount}} Donation </h4>
+       <p class="list-group-item-text">From {{$donation->name}} on <small>{{ date('F dS, Y', strtotime($donation->created_at)) }} </small> </p>
+  </a>
+
             
+            @endforeach
+         @endif
+        <p>No donation collected for this team as yet.</p>
         </div><!-- /.box-body -->
+    <div class="text-center">{{ $team_donations->links() }} </div>
     </div><!--box-->
 
 @endsection

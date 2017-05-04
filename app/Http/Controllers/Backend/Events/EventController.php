@@ -8,6 +8,7 @@ use App\Models\Access\User\User;
 use App\Models\Access\Team\Team;
 use App\Models\Dashboard\Event;
 use App\Models\Dashboard\Total;
+use App\Mail\TeamEvents;
 
 class EventController extends Controller
 {
@@ -26,6 +27,7 @@ class EventController extends Controller
 
     public function createPost(Request $request)
     {
+
         $event = new Event();
         $event->title = $request->title;
         $event->slug  = str_slug($request->title, '-');
@@ -44,6 +46,36 @@ class EventController extends Controller
            $event_total->save();
 
         }
+        if($event && $request->has('team_owner'))
+        {
+
+         $teamModel = config('teamwork.team_model');
+         $team = $teamModel::findOrFail($event->team_id);
+         $content = [
+             'teams' => $team,
+             'events' => $event,
+
+         ];
+
+         $emails = [];
+         foreach($team->users as $users)
+         {
+             array_push($emails, $users->email);
+         }
+         $mailTo = \Auth::user()->email;
+        // Version for Mail Trap
+         \Mail::to($mailTo)->cc($emails)->send(new TeamEvents($content));
+         /*
+         *  Live
+         * \Mail::to($mailTo)->bcc($emails)->send(new TeamEvents($content));
+         */
+         return redirect('admin/teams');
+
+
+        }
+
+
+
           return redirect('admin/events');
 
     }

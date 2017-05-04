@@ -8,16 +8,24 @@
 @endsection
 
 @section('content')
+ @if ($message = Session::get('error'))
+                <div class="custom-alerts alert alert-danger fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {!! $message !!}
+                </div>
+                <?php Session::forget('error');?>
+                @endif
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        Your Teams @if(Auth::user()->currentTeam)({{Auth::user()->currentTeam->users->count()}})@endif
+                        Your Teams
                         <a class="pull-right btn btn-default btn-sm" href="{{route('teams.create')}}">
                             <i class="fa fa-plus"></i> Create team
                         </a>
                     </div>
+                  <p>Current Team Members: @if(Auth::user()->currentTeam)({{Auth::user()->currentTeam->users->count()}})@endif</p>
                     <div class="panel-body">
                         <table class="table table-striped">
                             <thead>
@@ -57,6 +65,10 @@
                                                 <a href="{{route('teams.edit', $team)}}" class="btn btn-sm btn-default">
                                                     <i class="fa fa-pencil"></i> Edit
                                                 </a>
+                                                <a href="{{route('teams.create.event',$team->id)}}" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-plus"></i> Event
+                                                </a>
+
 
                                                 <form style="display: inline-block;" action="{{route('teams.destroy', $team)}}" method="post">
                                                     {!! csrf_field() !!}

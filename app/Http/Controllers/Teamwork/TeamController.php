@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
 use App\Models\Access\User\User;
+use App\Models\Dashboard\Event;
 
 
 class TeamController extends Controller
@@ -109,6 +110,31 @@ class TeamController extends Controller
 
         return view('teamwork.edit')->withTeam($team);
     }
+
+    public function event($id)
+    {
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($id);
+        $existing_event = Event::where('team_id', $id)->first();
+        if (!auth()->user()->isOwnerOfTeam($team)) {
+            abort(403);
+        }
+        if($existing_event){
+          \Session::put('error','Event already exist for this team.');
+          return back();
+        }
+
+       return view('teamwork.create-event')->withTeam($team);
+
+    }
+
+//     $existing_event = $event::where('team_id', $id->exists());
+//        if($existing_event){
+//          abort(403);
+//        }
+//        else{
+//         return view('teamwork.create-event')->withTeam($team);
+//        }
 
     /**
      * Update the specified resource in storage.

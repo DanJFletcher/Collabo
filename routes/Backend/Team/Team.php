@@ -20,3 +20,7 @@
 
     Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
     Route::get('deny/{token}', 'AuthController@denyInvite')->name('teams.deny_invite');
+
+    Route::get('create/event/{id}', 'TeamController@event')->name('teams.create.event');
+//
+//->middleware('teamowner')

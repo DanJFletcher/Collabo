@@ -11,4 +11,11 @@ class Team extends TeamworkTeam
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function events()
+    {
+        return $this->hasOne(Event::class);
+    }
+
+
 }
