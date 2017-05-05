@@ -233,11 +233,12 @@
     <h4 class="list-group-item-heading">${{$donation->amount}} Donation </h4>
        <p class="list-group-item-text">From {{$donation->name}} on <small>{{ date('F dS, Y', strtotime($donation->created_at)) }} </small> </p>
   </a>
-
-            
             @endforeach
+
+            @else
+           <p>No donation collected for this team as yet.</p>
          @endif
-        <p>No donation collected for this team as yet.</p>
+
         </div><!-- /.box-body -->
     <div class="text-center">{{ $team_donations->links() }} </div>
     </div><!--box-->

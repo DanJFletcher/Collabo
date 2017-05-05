@@ -38,28 +38,28 @@
                 </a>
             </li>
             
-            <li class="{{ active_class(Active::checkUriPattern('admin/donations')) }}"> {{-- Set Active--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/donations*')) }}"> {{-- Set Active--}}
                 <a href="{{ route('admin.donations') }}"> {{-- Route --}}
                     <i class="fa fa-money"></i> {{-- Icon --}}
                     <span>Donations</span> {{-- Name of link--}}
                 </a>
             </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/teams')) }}"> {{-- Set Active--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/teams*')) }}"> {{-- Set Active--}}
                 <a href="{{route('teams.index')}}"> {{-- Route --}}
                     <i class="fa fa-users"></i> {{-- Icon --}}
                     <span>Teams</span> {{-- Name of link--}}
                 </a>
             </li>
             
-            <li class="{{ active_class(Active::checkUriPattern('admin/messaging/*')) }}"> {{-- Set Active--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/messaging*')) }}"> {{-- Set Active--}}
                 <a href="{{route('messenger.index')}}"> {{-- Route --}}
                     <i class="fa fa-comments"></i> {{-- Icon --}}
                     <span>Messaging</span> {{-- Name of link--}}
                 </a>
             </li>
             
-            <li class="{{ active_class(Active::checkUriPattern('admin/members')) }}"> {{-- Set Active--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/members*')) }}"> {{-- Set Active--}}
                 <a href="{{ route('admin.members.index') }}"> {{-- Route --}}
                     <i class="fa fa-user-circle-o"></i> {{-- Icon --}}
                     <span>Members</span> {{-- Name of link--}}
@@ -178,6 +178,26 @@
                 </ul>
             </li>
 
+
+             <li class="{{ active_class(Active::checkUriPattern('admin/reports*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-calendar"></i>
+                    <span>Reports</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu treeview-menu {{ active_class(Active::checkUriPattern('admin/reports*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/reports*'), 'display: block;') }}">
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/reports')) }}">
+                        <a href="{{route('admin.reports.index')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>All Reports</span>
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </li>
 
             @endauth
 

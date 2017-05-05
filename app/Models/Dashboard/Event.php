@@ -14,4 +14,10 @@ class Event extends Model
         return $this->belongsTo(Team::class);
 
     }
+
+      public function total()
+    {
+        return $this->hasOne(Total::class);
+
+    }
 }

@@ -115,16 +115,42 @@
                             </thead>
                             <tbody>
                                 @foreach($all as $teams)
+                                <?php
+                                $team_id = $teams->id;
+                                $user = auth()->user()->name;
+                                ?>
                                     <tr>
                                         <td>{{$teams->name}}</td>
                                         <td>{{$teams->owner->name}}</td>
                                         <td>
 
+                                             @if(Auth::user()->currentTeam->id == $team_id  )
+                                               <span class="label label-primary">Member</span>
 
+                                            @elseif(auth()->user()->isOwnerOfTeam($team_id))
+
+                                            <span class="label label-success">Owner</span>
+
+                                            @else
+                                               <a href="" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-sign-in"></i> Join
+                                                </a>
+                                            @endif
+
+
+
+                                            {{--@if(!auth()->user()->isOwnerOfTeam($team_id) )
                                            <a onclick="join({{$teams->id}})"  class="btn btn-sm btn-default">
                                                 <i class="fa fa-sign-in"></i> Join
                                             </a>
 
+
+                                            @else
+                                            <span class="label label-success">Owner</span>
+
+
+
+                                            @endif--}}
 <!--
                                              @if(Auth::user()->teams )
                                             @else

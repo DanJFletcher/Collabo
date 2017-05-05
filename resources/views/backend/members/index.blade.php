@@ -26,7 +26,6 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Current Team</th>
                             <th>Actions</th>
                         </tr>
@@ -34,7 +33,7 @@
                     @foreach($users as $user)
                     <tr>
                     <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
+
 
                     <td>
                        @if(count($user->teams) > 0)
