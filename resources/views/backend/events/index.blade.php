@@ -1,4 +1,9 @@
+@inject('Chart', 'ConsoleTVs\Charts\Facades\Charts')
 @extends ('backend.layouts.app')
+@section('after-styles')
+
+{!! Charts::assets() !!}
+@endsection
 
 @section('page-header')
     <h1>
@@ -60,13 +65,8 @@
               <div>{!!$event->description!!}</div>
 
             <ul>
-              <li style="width:23%;"><span class="fa fa-money"></span> $ {{(float)$event->goal_amount}} </li>
-                <li><div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="70"
-                aria-valuemin="0" aria-valuemax="100" style="width:10%">
-               <span class="sr-only">70% Complete</span>
-                </div>
-                    </div></li>
+              <li style="width:23%;"><span class="fa fa-money"></span> ${{$event['total']}} of $ {{(float)$event->goal_amount}}  </li>
+                <li>{!!$event['progress_chart']->render()!!} </li>
                 <li style="width:24%;" id="clockdiv-{{$event->id}}" class="mystyle"><span class="days"></span> <span class="hours"></span> <span class="minutes"></span> <span class="seconds"></span></li>
 
             </ul>
@@ -81,16 +81,11 @@
         </li>
 
 
-
-
-
           @endforeach
       </ul>
     </div>
   </div>
 </div>
-
-
 
 
 
