@@ -1,5 +1,8 @@
 @extends ('backend.layouts.app')
+@section('after-styles')
 
+{!! Charts::assets() !!}
+@endsection
 @section('page-header')
     <h1>
         Reports
@@ -12,7 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Charts View
+        Chart View
         <small></small>
       </h1>
 
@@ -35,7 +38,8 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="areaChart" style="height:250px"></canvas>
+
+                  {!!$users_chart->render() !!}
               </div>
             </div>
             <!-- /.box-body -->
@@ -45,7 +49,7 @@
           <!-- DONUT CHART -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Donations Charts</h3>
+              <h3 class="box-title">Event Charts</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -54,7 +58,8 @@
               </div>
             </div>
             <div class="box-body">
-              <canvas id="pieChart" style="height:250px"></canvas>
+                  {!! $chart->render() !!}
+
             </div>
             <!-- /.box-body -->
           </div>
@@ -66,7 +71,7 @@
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Event Charts</h3>
+              <h3 class="box-title">Donation Charts</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -76,7 +81,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="lineChart" style="height:250px"></canvas>
+               {!!  $donors_chart->render() !!}
               </div>
             </div>
             <!-- /.box-body -->
@@ -96,7 +101,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="barChart" style="height:250px"></canvas>
+                {!! $team_chart->render() !!}
               </div>
             </div>
             <!-- /.box-body -->
@@ -113,6 +118,8 @@
   </div>
   <!-- /.content-wrapper -->
 
+
+{{--{!! $progress_chart->render()!!}--}}
 @endsection
 
 
