@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use Cartalyst\Stripe\Stripe;
 use Stripe\Error\Card;
 use App\Models\Dashboard\Payment\Customer;
-use App\Notifications\DonationMade;
 use App\Models\Dashboard\Total;
 use App\Models\Dashboard\Event;
+use App\Notifications\DonationMade;
 use Auth;
 
 
