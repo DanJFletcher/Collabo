@@ -14,7 +14,29 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::orderBy('id','desc')->get();
+        $events = Event::with('total')->orderBy('id','desc')->get();
+        $event = array();
+        foreach($events as $event)
+        {
+            $event['goal'] = (int)$event->goal_amount;
+
+            if(!empty($event->total))
+            {
+            $event['total'] = (int)$event->total->total_donations;
+            }
+            $event['progress_chart'] = \Charts::create('progressbar', 'progressbarjs')
+                        ->title('')
+                        ->values([$event['total'],0,$event['goal']])
+                        ->responsive(false)
+                        ->height(15)
+                        ->width(0);
+
+
+        }
+
+//return($events);
+
+
         return view('backend.events.index',compact('events'));
     }
     
