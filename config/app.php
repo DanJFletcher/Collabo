@@ -192,6 +192,7 @@ return [
         Vinkla\Pusher\PusherServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -269,6 +270,7 @@ return [
         'Stripe'      => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Talk'        => Nahid\Talk\Facades\Talk::class,
         'Purifier'    => Mews\Purifier\Facades\Purifier::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 
