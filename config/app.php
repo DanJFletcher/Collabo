@@ -175,7 +175,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Package Service Providers...Holy Crap
          */
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
@@ -193,6 +193,7 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -270,7 +271,8 @@ return [
         'Stripe'      => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Talk'        => Nahid\Talk\Facades\Talk::class,
         'Purifier'    => Mews\Purifier\Facades\Purifier::class,
-        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Charts'      => ConsoleTVs\Charts\Facades\Charts::class,
+        'Excel'       => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

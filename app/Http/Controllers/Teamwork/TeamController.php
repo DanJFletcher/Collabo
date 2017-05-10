@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Mpociot\Teamwork\Exceptions\UserNotInTeamException;
 use App\Models\Access\User\User;
 use App\Models\Dashboard\Event;
+use App\Models\Dashboard\TeamTotal;
 
 
 class TeamController extends Controller
@@ -54,6 +55,15 @@ class TeamController extends Controller
             'name' => $request->name,
             'owner_id' => $request->user()->getKey()
         ]);
+
+          if($team)
+        {
+           $team_total = new TeamTotal;
+           $team_total->event_id = null;
+           $team_total->team_id = $team->id;
+           $team_total->save();
+
+        }
         $request->user()->attachTeam($team);
 
         return redirect(route('teams.index'));
@@ -69,8 +79,25 @@ class TeamController extends Controller
     {
         $teamModel = config('teamwork.team_model');
         $team = $teamModel::findOrFail($id);
+        /*Added*/
+        $userModel = config('teamwork.user_model');
+        $current_event_id = Event::where('team_id', $id)->first();
         try {
             auth()->user()->switchTeam($team);
+        /**
+        * Update current event id when user switch teams
+        * Only run code if an event_id is present
+        **/
+        if(!empty($current_event_id))
+        {
+           $userModel::where('current_team_id', $id)
+                    ->update(['current_event_id' => $current_event_id->id]);
+        }
+        else{
+            $userModel::where('current_team_id', $id)
+                    ->update(['current_event_id' => null]);
+        }
+        /*End*/
         } catch ( UserNotInTeamException $e ) {
             abort(403);
         }
@@ -81,6 +108,7 @@ class TeamController extends Controller
     {
         $teamModel = config('teamwork.team_model');
         $team = $teamModel::findOrFail($id);
+
 
         return view('teamwork.show')->withTeam($team);
     }

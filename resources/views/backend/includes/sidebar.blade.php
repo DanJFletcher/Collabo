@@ -181,7 +181,7 @@
 
              <li class="{{ active_class(Active::checkUriPattern('admin/reports*')) }} treeview">
                 <a href="#">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
                     <span>Reports</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -193,6 +193,34 @@
                             <span>All Reports</span>
                         </a>
                     </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/reports/user')) }}">
+                        <a href="{{route('admin.reports.user')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>User Reports</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/reports/donations')) }}">
+                        <a href="{{route('admin.reports.donation')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Donation Reports</span>
+                        </a>
+                    </li>
+                    <li class="{{ active_class(Active::checkUriPattern('admin/reports/team')) }}">
+                        <a href="{{route('admin.reports.team')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Team Reports</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/reports/event')) }}">
+                        <a href="{{route('admin.reports.event')}}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Event Reports</span>
+                        </a>
+                    </li>
+
 
 
 

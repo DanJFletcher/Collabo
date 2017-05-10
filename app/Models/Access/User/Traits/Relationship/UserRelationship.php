@@ -37,12 +37,13 @@ trait UserRelationship
     }
     public function customers()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasMany('\App\Models\Dashboard\Payment\Customer');
     }
 
     public function events()
     {
-        return $this->hasMany(Event::class);
+//        return $this->hasMany(Event::class);
+        return $this->hasMany('\App\Models\Dashboard\Event');
     }
 
     // Get Current Event

@@ -123,21 +123,24 @@
                                         <td>{{$teams->name}}</td>
                                         <td>{{$teams->owner->name}}</td>
                                         <td>
+                                     <!-- Issue Here  -->
 
-                                             @if(Auth::user()->currentTeam->id == $team_id  )
-                                               <span class="label label-primary">Member</span>
+                                            {{-- Can't be use
 
-                                            @elseif(auth()->user()->isOwnerOfTeam($team_id))
+                                            @if(Auth::user()->currentTeam->id == $team_id )--}}
+
+
+                                            @if(auth()->user()->isOwnerOfTeam($team_id))
 
                                             <span class="label label-success">Owner</span>
 
                                             @else
-                                               <a href="" class="btn btn-sm btn-default">
-                                                    <i class="fa fa-sign-in"></i> Join
-                                                </a>
+                                               <a onclick="join({{$teams->id}})"  class="btn btn-sm btn-default">
+                                                <i class="fa fa-sign-in"></i> Join
+                                            </a>
                                             @endif
 
-
+                                            <!--End Issue  -->
 
                                             {{--@if(!auth()->user()->isOwnerOfTeam($team_id) )
                                            <a onclick="join({{$teams->id}})"  class="btn btn-sm btn-default">

@@ -16,6 +16,10 @@ class Team extends TeamworkTeam
     {
         return $this->hasOne(Event::class);
     }
+    public function totals()
+    {
+       return $this->hasMany('App\Models\Dashboard\Total');
+    }
 
 
 }

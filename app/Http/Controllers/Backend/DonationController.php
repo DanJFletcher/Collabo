@@ -13,21 +13,22 @@ use App\Notifications\DonationMade;
 use Auth;
 
 
+
 class DonationController extends Controller
 {
     public function index()
     {
         $id = Auth::user()->id;
-        $team_id = Auth::user()->currentTeam->id;
+        if(!empty(Auth::user()->currentTeam->id))
+        {
+          $team_id = Auth::user()->currentTeam->id;
+          $team_donations = Customer::orderBy('id','desc')->where('team_id', $team_id)->Paginate(5,['*'], 'team_donations'  );
+          $customers = Customer::orderBy('id','desc')->where('user_id', $id)->Paginate(5,['*'],'customers');
+
+         return view('backend.donations.index', compact('customers','team_donations'));
+        }
         $customers = Customer::orderBy('id','desc')->where('user_id', $id)->take(5)->get();
-        $team_donations = Customer::orderBy('id','desc')->where('team_id', $team_id)->simplePaginate(5);
-
-          return view('backend.donations.index', compact('customers','team_donations'));
-//        $event = Event::all();
-//        return $event;
-//
-
-
+        return view('backend.donations.index', compact('customers'));
     }
 
     public function collect(Request $request, Customer $customers)
@@ -90,6 +91,10 @@ class DonationController extends Controller
 
                       \DB::table('totals')
                       ->where('event_id',  $customer->event_id)
+                      ->update(['total_donations' => $event_total->sum('amount')]);
+
+                      \DB::table('team_totals')
+                      ->where('team_id',  $customer->team_id)
                       ->update(['total_donations' => $event_total->sum('amount')]);
                     }
 

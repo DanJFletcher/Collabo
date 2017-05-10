@@ -30,8 +30,6 @@ class EventController extends Controller
                         ->responsive(false)
                         ->height(15)
                         ->width(0);
-
-
         }
 
 //return($events);

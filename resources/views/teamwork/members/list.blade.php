@@ -30,7 +30,10 @@
                                                     <input type="hidden" name="_method" value="DELETE" />
                                                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
                                                 </form>
+
                                             @endif
+                                        @else
+                                        <a href="{{route('admin.message.read', ['id'=>$user->id])}}" class="btn btn-primary btn-sm"><i class="fa fa-commenting-o"></i> </a>
                                         @endif
                                     </td>
                                 </tr>

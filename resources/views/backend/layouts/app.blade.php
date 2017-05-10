@@ -135,6 +135,8 @@
         }
 
         </script>
+
         @yield('after-scripts')
+
     </body>
 </html>
