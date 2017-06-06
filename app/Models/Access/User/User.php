@@ -16,6 +16,9 @@ use YoHang88\LetterAvatar\LetterAvatar;
 /**
  * Class User.
  */
+
+
+
 class User extends Authenticatable
 {
     use UserScope,
