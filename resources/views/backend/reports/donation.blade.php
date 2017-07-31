@@ -61,7 +61,7 @@
             <form  action="{{URL::To('admin/reports/donations')}}" method="get">
             <div class="box-tools pull-right">
              <select class="form-control"  name="timeline" onchange="this.form.submit()">
-                <option>Sort</option>
+                <option disabled >Sort</option>
                 <option value="90" @if(isset($timeline)) @if($timeline == 60) Selected @endif @endif>3 Months</option>
                 <option value="60" @if(isset($timeline)) @if($timeline == 60) Selected @endif @endif>2 Months</option>
                 <option value="30" @if(isset($timeline)) @if($timeline == 30) Selected @endif @endif>30 Days</option>
