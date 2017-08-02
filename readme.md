@@ -6,10 +6,22 @@
  <img src="http://i.imgur.com/ILswSzC.png" alt="Collabo Dashboard">
 </div>
 
-### Official Documentation
+## Features
+  
+  * Laravel 5.4
+  * Social Logins
+  * Teams
+  * Paypal and Stripe
+  * Messaging between all users
+  * Reports
+  * Notifications
+  * Roles (Admin, Team Owner, Users) 
+  * News
+  
 
 #### Getting Started
 
+  Coming Soon
 
 
 ```shell
@@ -19,5 +31,8 @@ composer install
 ```shell
 php artisan key:generate
 ```
-More Coming soon
+
+### Official Documentation
+ 
+Coming soon
 
