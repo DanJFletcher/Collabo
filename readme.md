@@ -21,16 +21,8 @@
 
 #### Getting Started
 
-  Coming Soon
+Coming Soon
 
-
-```shell
-composer install
-```
-
-```shell
-php artisan key:generate
-```
 
 ### Official Documentation
  
