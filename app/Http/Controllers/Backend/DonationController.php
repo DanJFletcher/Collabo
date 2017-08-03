@@ -124,8 +124,8 @@ class DonationController extends Controller
 
 
 
-//                           $sum = $customers->sum('amount');
+//        $sum = $customers->sum('amount');
 //        $total = 0;
 //        $total += $customers->amount;
- //       $entry->view_count = $entry->view_count +1;
+//        $entry->view_count = $entry->view_count +1;
 //        dd($sum);
