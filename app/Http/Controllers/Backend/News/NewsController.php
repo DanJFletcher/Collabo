@@ -11,10 +11,10 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::orderBy('id','desc')->get();
+        $news = News::orderBy('id', 'desc')->get();
         return view('backend.news.index')->withNews($news);
     }
-    
+
     public function create()
     {
         return view('backend.news.create');
@@ -28,7 +28,5 @@ class NewsController extends Controller
         $news->content = Purifier::clean($request->news_content);
         $news->save();
         return redirect('admin/news');
-
-
     }
 }
