@@ -11,14 +11,17 @@ use View;
 
 class MessengerController extends Controller
 {
-   
+
     protected $authUser;
     public function __construct()
     {
-        
-        $this->middleware(function ($request, $next) { Talk::setAuthUserId(Auth::user()->id); return $next($request); });
-      
-        View::composer('backend.includes.partials.peoplelist', function($view) {
+
+        $this->middleware(function ($request, $next) {
+            Talk::setAuthUserId(Auth::user()->id);
+            return $next($request);
+        });
+
+        View::composer('backend.includes.partials.peoplelist', function ($view) {
             $threads = Talk::threads();
             $view->with(compact('threads'));
         });
@@ -27,15 +30,15 @@ class MessengerController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('backend.messenger.index',compact('users'));
+        return view('backend.messenger.index', compact('users'));
     }
-    
+
     public function chatHistory($id)
     {
         $conversations = Talk::getMessagesByUserId($id);
         $user = '';
         $messages = [];
-        if(!$conversations) {
+        if (!$conversations) {
             $user = User::find($id);
         } else {
             $user = $conversations->withUser;
@@ -43,10 +46,9 @@ class MessengerController extends Controller
         }
 
         return view('backend.messenger.conversations', compact('messages', 'user'));
-
     }
-    
-       public function ajaxSendMessage(Request $request)
+
+    public function ajaxSendMessage(Request $request)
     {
         if ($request->ajax()) {
             $rules = [
@@ -69,7 +71,7 @@ class MessengerController extends Controller
     public function ajaxDeleteMessage(Request $request, $id)
     {
         if ($request->ajax()) {
-            if(Talk::deleteMessage($id)) {
+            if (Talk::deleteMessage($id)) {
                 return response()->json(['status'=>'success'], 200);
             }
 
