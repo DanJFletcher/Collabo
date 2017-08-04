@@ -65,14 +65,14 @@ class ReportController extends Controller
                       ->title('Donations')
                       ->labels($donars->pluck('name'))
                       ->values($donars->pluck('amount'))
-                      ->dimensions(1000,500)
+                      ->dimensions(1000, 500)
                       ->responsive(true);
 
 
         $team_chart = Charts::multi('areaspline', 'highcharts')
                     ->title('Team Progress')
                     ->colors(['#e07164', '#178c1b'])
-                    ->labels( $teams->pluck('name'))
+                    ->labels($teams->pluck('name'))
 
                     ->dataset('Teams', $teams->pluck('total_donations'));
 //                    ->dataset('Users',  $teams->pluck('amount'));
@@ -85,20 +85,25 @@ class ReportController extends Controller
                             ->height(50)
                             ->width(0);
 
-        return view('backend.reports.index',['users_chart' => $users_chart, 'chart' => $chart,'donors_chart' => $donors_chart,'team_chart' => $team_chart,'progress_chart' => $progress_chart, 'donation_total' => $donations_per_team->sum('amount')]);
+        return view('backend.reports.index', [
+            'users_chart' => $users_chart,
+            'chart' => $chart,
+            'donors_chart' => $donors_chart,
+            'team_chart' => $team_chart,
+            'progress_chart' => $progress_chart,
+            'donation_total' => $donations_per_team->sum('amount'),
+        ]);
     }
 
     public function userReports()
     {
-
-     return view('backend.reports.user');
-
+        return view('backend.reports.user');
     }
 
     public function userReportsTable()
     {
 
-        $users = User::whereStatus(1)->whereConfirmed(1)->where('id','!=',1)->where('id', '!=', \Auth::user()->id)->select(['name','email']);
+        $users = User::whereStatus(1)->whereConfirmed(1)->where('id', '!=', 1)->where('id', '!=', \Auth::user()->id)->select(['name','email']);
 //        $users = \DB::table('users')
 //                    ->join('customers','users.id', '=', 'customers.user_id')
 //                    ->select('users.name','users.email');
@@ -107,50 +112,55 @@ class ReportController extends Controller
         return Datatables::of($users)->make();
     }
 
-     public function teamReports()
+    public function teamReports()
     {
-
-     return view('backend.reports.team');
-
+        return view('backend.reports.team');
     }
+
     public function teamReportsTable()
     {
-
-
+        //
     }
 
-     public function eventReports()
+    public function eventReports()
     {
-
-    return view('backend.reports.event');
-
+        return view('backend.reports.event');
     }
 
     public function eventReportsTable()
     {
-
-
-
+        //
     }
+
     public function donationReports(Request $request)
     {
-       $timeline = $request->timeline;
-       $default = 15;
-       /* Get filter to filter different views*/
-       $number = $request->has('timeline') ? $timeline : $default;
+        $timeline = $request->timeline;
+        $default = 15;
+        /* Get filter to filter different views*/
+        $number = $request->has('timeline') ? $timeline : $default;
 
-       $customers = Charts::database(Customer::all(), 'bar', 'highcharts')
-                      ->elementLabel("Total")
-                      ->dimensions(1000, 500)
-                      ->responsive(true)
-                      ->lastByDay($number,true);
-        return view('backend.reports.donation',compact('customers','timeline','number'));
+        $customers = Charts::database(Customer::all(), 'bar', 'highcharts')
+                        ->elementLabel("Total")
+                        ->dimensions(1000, 500)
+                        ->responsive(true)
+                        ->lastByDay($number, true);
+        return view('backend.reports.donation', compact('customers', 'timeline', 'number'));
     }
 
     public function donationReportsTable()
     {
-       $customers = Customer::orderBy('id','desc')->select(['name','email','address','city','postal','payment_type','amount','created_at']);
-        return Datatables::of($customers)->make();
-    }
+        $customers = Customer::orderBy('id', 'desc')
+            ->select([
+                'name',
+                'email',
+                'address',
+                'city',
+                'postal',
+                'payment_type',
+                'amount',
+                'created_at',
+            ]);
 
+            return Datatables::of($customers)->make();
+    }
 }
