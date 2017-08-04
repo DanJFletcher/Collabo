@@ -27,6 +27,7 @@
         "mpociot/teamwork": "~5.0",
         "nahid/talk": "^2.2",
         "paypal/rest-api-sdk-php": "*",
+        "squizlabs/php_codesniffer": "^3.0",
         "unisharp/laravel-ckeditor": "^4.6",
         "vinkla/pusher": "^2.5",
         "yajra/laravel-datatables-oracle": "^7.0",

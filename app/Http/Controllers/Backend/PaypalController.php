@@ -2,30 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Dashboard\Payment\Customer;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use URL;
-use Session;
 use Redirect;
-use App\Http\Controllers\Controller;
+use Session;
+use URL;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-use App\Models\Dashboard\Payment\Customer;
-/*
-* PayPal
-*/
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
+use PayPal\Api\ExecutePayment;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
+use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 
 class PaypalController extends Controller
 {
@@ -74,19 +71,19 @@ class PaypalController extends Controller
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
-                \Session::put('error','Connection timeout');
+                \Session::put('error', 'Connection timeout');
                 return Redirect::route('donations');
                 /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
                 /** $err_data = json_decode($ex->getData(), true); **/
                 /** exit; **/
             } else {
-                \Session::put('error','Some error occur, sorry for inconvenient');
+                \Session::put('error', 'Some error occur, sorry for inconvenient');
                 return Redirect::route('donations');
                 /** die('Some error occur, sorry for inconvenient'); **/
             }
         }
-        foreach($payment->getLinks() as $link) {
-            if($link->getRel() == 'approval_url') {
+        foreach ($payment->getLinks() as $link) {
+            if ($link->getRel() == 'approval_url') {
                 $redirect_url = $link->getHref();
                 break;
             }
@@ -102,15 +99,15 @@ class PaypalController extends Controller
 
 
 
-        if(isset($redirect_url)) {
+        if (isset($redirect_url)) {
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
         }
-        \Session::put('error','Unknown error occurred');
+        \Session::put('error', 'Unknown error occurred');
         return Redirect::route('admin.donations');
     }
 
-         public function getPaypalSatus()
+    public function getPaypalSatus()
     {
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
@@ -126,11 +123,14 @@ class PaypalController extends Controller
         Session::forget('user_id');
         Session::forget('event_id');
         Session::forget('user_message');
+
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-            \Session::put('error','Payment failed');
+            \Session::put('error', 'Payment failed');
             return Redirect::route('admin.donations');
         }
+
         $payment = Payment::get($payment_id, $this->_api_context);
+
         /** PaymentExecution object includes information necessary **/
         /** to execute a PayPal account payment. **/
         /** The payer_id is added to the request query parameters **/
@@ -142,8 +142,7 @@ class PaypalController extends Controller
         /** dd($result);exit; /** DEBUG RESULT, remove it later **/
         if ($result->getState() == 'approved') {
             /** Loop Through Transaction **/
-            foreach($result->transactions as $transaction)
-            {
+            foreach ($result->transactions as $transaction) {
                 $total_amount = $transaction->amount->total;
             }
             /** it's all right **/
@@ -173,21 +172,19 @@ class PaypalController extends Controller
                 * Send Email to Admin using notification.
                 */
 
-             if($customer)
-            {
-              $event_total = Customer::where('team_id', $customer->team_id)->get();
+            if ($customer) {
+                $event_total = Customer::where('team_id', $customer->team_id)->get();
               // ->orwhere('team_id', $customer->team_id)
 
-               \DB::table('totals')
-              ->where('event_id',  $customer->event_id)
-              ->update(['total_donations' => $event_total->sum('amount')]);
+                \DB::table('totals')
+                ->where('event_id', $customer->event_id)
+                ->update(['total_donations' => $event_total->sum('amount')]);
             }
 
-            \Session::put('success','Paypal Payment Successful');
+            \Session::put('success', 'Paypal Payment Successful');
             return Redirect::route('admin.donations');
         }
-        \Session::put('error','Payment failed');
+        \Session::put('error', 'Payment failed');
         return Redirect::route('admin.dashboard');
     }
-
 }
