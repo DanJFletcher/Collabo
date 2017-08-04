@@ -14,40 +14,38 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::with('total')->orderBy('id','desc')->get();
+        $events = Event::with('total')->orderBy('id', 'desc')->get();
         $event = array();
-        foreach($events as $event)
-        {
+        foreach ($events as $event) {
             $event['goal'] = (int)$event->goal_amount;
 
-            if(!empty($event->total))
-            {
-            $event['total'] = (int)$event->total->total_donations;
+            if (!empty($event->total)) {
+                $event['total'] = (int)$event->total->total_donations;
             }
+
             $event['progress_chart'] = \Charts::create('progressbar', 'progressbarjs')
-                        ->title('')
-                        ->values([$event['total'],0,$event['goal']])
-                        ->responsive(false)
-                        ->height(15)
-                        ->width(0);
+                ->title('')
+                ->values([$event['total'],0,$event['goal']])
+                ->responsive(false)
+                ->height(15)
+                ->width(0);
         }
 
 //return($events);
 
 
-        return view('backend.events.index',compact('events'));
+        return view('backend.events.index', compact('events'));
     }
-    
+
     public function create()
     {
         $users = User::whereStatus(1)->whereConfirmed(1)->get();
         $teams = Team::all();
-        return view('backend.events.create',compact('users','teams'));
+        return view('backend.events.create', compact('users', 'teams'));
     }
 
     public function createPost(Request $request)
     {
-
         $event = new Event();
         $event->title = $request->title;
         $event->slug  = str_slug($request->title, '-');
@@ -58,45 +56,37 @@ class EventController extends Controller
         $event->date_of_event = $request->event_date;
         $event->save();
 
-        if($event)
-        {
-           $event_total = new Total;
-           $event_total->event_id = $event->id;
-           $event_total->team_id = $event->team_id;
-           $event_total->save();
-
-        }
-        if($event && $request->has('team_owner'))
-        {
-
-         $teamModel = config('teamwork.team_model');
-         $team = $teamModel::findOrFail($event->team_id);
-         $content = [
-             'teams' => $team,
-             'events' => $event,
-
-         ];
-
-         $emails = [];
-         foreach($team->users as $users)
-         {
-             array_push($emails, $users->email);
-         }
-         $mailTo = \Auth::user()->email;
-        // Version for Mail Trap
-         \Mail::to($mailTo)->cc($emails)->send(new TeamEvents($content));
-         /*
-         *  Live
-         * \Mail::to($mailTo)->bcc($emails)->send(new TeamEvents($content));
-         */
-         return redirect('admin/teams');
-
-
+        if ($event) {
+            $event_total = new Total;
+            $event_total->event_id = $event->id;
+            $event_total->team_id = $event->team_id;
+            $event_total->save();
         }
 
+        if ($event && $request->has('team_owner')) {
+            $teamModel = config('teamwork.team_model');
+            $team = $teamModel::findOrFail($event->team_id);
+            $content = [
+                'teams' => $team,
+                'events' => $event,
 
+            ];
 
+            $emails = [];
+
+            foreach ($team->users as $users) {
+                array_push($emails, $users->email);
+            }
+
+            $mailTo = \Auth::user()->email;
+            // Version for Mail Trap
+            \Mail::to($mailTo)->cc($emails)->send(new TeamEvents($content));
+            /*
+            *  Live
+            * \Mail::to($mailTo)->bcc($emails)->send(new TeamEvents($content));
+            */
+            return redirect('admin/teams');
+        }
           return redirect('admin/events');
-
     }
 }
