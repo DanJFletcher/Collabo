@@ -12,20 +12,24 @@ class MembersController extends Controller
 {
     public function index(Request $request)
     {
-        
-        $users = User::whereStatus(1)->whereConfirmed(1)->where('id','!=',1)->where('id', '!=', \Auth::user()->id)->get();
 
-        return view('backend.members.index',compact('users'));
+        $users = User::whereStatus(1)
+            ->whereConfirmed(1)
+            ->where('id', '!=', 1)
+            ->where('id', '!=', \Auth::user()->id)
+            ->get();
+
+        return view('backend.members.index', compact('users'));
     }
 
     public function show(Request $request)
     {
 
-          if($request->ajax()){
-                $id = $request->id;
-                $users = User::find($id);
-                return response()->json($users);
-            }
+        if ($request->ajax()) {
+            $id = $request->id;
+            $users = User::find($id);
+            return response()->json($users);
+        }
     }
 
     public function mailUser(Request $request)
