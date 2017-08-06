@@ -59,16 +59,15 @@ class TeamMemberController extends Controller
 
     public function leave($team_id, $user_id)
     {
-       $teamModel = config('teamwork.team_model');
-       $team = $teamModel::findOrFail($team_id);
+        $teamModel = config('teamwork.team_model');
+        $team = $teamModel::findOrFail($team_id);
 
-       $userModel = config('teamwork.user_model');
-       $user = $userModel::findOrFail($user_id);
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($user_id);
 
-       $user->detachTeam($team);
+        $user->detachTeam($team);
 
-       return redirect(route('teams.index'));
-
+        return redirect(route('teams.index'));
     }
 
     /**
@@ -81,11 +80,12 @@ class TeamMemberController extends Controller
         $teamModel = config('teamwork.team_model');
         $team = $teamModel::findOrFail($team_id);
 
-        if( !Teamwork::hasPendingInvite( $request->email, $team) )
-        {
-            Teamwork::inviteToTeam( $request->email, $team, function( $invite )
-            {
-                Mail::send('teamwork.emails.invite', ['team' => $invite->team, 'invite' => $invite], function ($m) use ($invite) {
+        if (!Teamwork::hasPendingInvite($request->email, $team)) {
+            Teamwork::inviteToTeam($request->email, $team, function ($invite) {
+                Mail::send('teamwork.emails.invite', [
+                    'team' => $invite->team,
+                    'invite' => $invite
+                ], function ($m) use ($invite) {
                     $m->to($invite->email)->subject('Invitation to join team '.$invite->team->name);
                 });
                 // Send email to user
@@ -95,13 +95,13 @@ class TeamMemberController extends Controller
                 'email' => 'The email address is already invited to the team.'
             ]);
         }
-        
+
         return redirect(route('teams.members.show', $team->id));
     }
 
     /**
      * Resend an invitation mail.
-     * 
+     *
      * @param $invite_id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
