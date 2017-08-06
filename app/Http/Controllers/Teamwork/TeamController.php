@@ -9,7 +9,6 @@ use App\Models\Access\User\User;
 use App\Models\Dashboard\Event;
 use App\Models\Dashboard\TeamTotal;
 
-
 class TeamController extends Controller
 {
     public function __construct()
@@ -24,7 +23,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-         
+
         $teamModel = config('teamwork.team_model');
         $all = $teamModel::all();
         return view('teamwork.index')
@@ -56,14 +55,13 @@ class TeamController extends Controller
             'owner_id' => $request->user()->getKey()
         ]);
 
-          if($team)
-        {
-           $team_total = new TeamTotal;
-           $team_total->event_id = null;
-           $team_total->team_id = $team->id;
-           $team_total->save();
-
+        if ($team) {
+            $team_total = new TeamTotal;
+            $team_total->event_id = null;
+            $team_total->team_id = $team->id;
+            $team_total->save();
         }
+
         $request->user()->attachTeam($team);
 
         return redirect(route('teams.index'));
@@ -84,26 +82,25 @@ class TeamController extends Controller
         $current_event_id = Event::where('team_id', $id)->first();
         try {
             auth()->user()->switchTeam($team);
-        /**
-        * Update current event id when user switch teams
-        * Only run code if an event_id is present
-        **/
-        if(!empty($current_event_id))
-        {
-           $userModel::where('current_team_id', $id)
+            /**
+            * Update current event id when user switch teams
+            * Only run code if an event_id is present
+            **/
+            if (!empty($current_event_id)) {
+                $userModel::where('current_team_id', $id)
                     ->update(['current_event_id' => $current_event_id->id]);
-        }
-        else{
-            $userModel::where('current_team_id', $id)
+            } else {
+                $userModel::where('current_team_id', $id)
                     ->update(['current_event_id' => null]);
-        }
+            }
         /*End*/
-        } catch ( UserNotInTeamException $e ) {
+        } catch (UserNotInTeamException $e) {
             abort(403);
         }
 
         return redirect(route('teams.index'));
     }
+
     public function seeTeam($id)
     {
         $teamModel = config('teamwork.team_model');
@@ -112,14 +109,13 @@ class TeamController extends Controller
 
         return view('teamwork.show')->withTeam($team);
     }
+
     public function joinTeam(Request $request)
     {
-
         $id = $request->id;
         $user = User::whereId(\Auth::user()->id)->first();
         $user->teams()->attach($id);
-
-   }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -147,13 +143,12 @@ class TeamController extends Controller
         if (!auth()->user()->isOwnerOfTeam($team)) {
             abort(403);
         }
-        if($existing_event){
-          \Session::put('error','Event already exist for this team.');
-          return back();
+        if ($existing_event) {
+            \Session::put('error', 'Event already exist for this team.');
+            return back();
         }
 
-       return view('teamwork.create-event')->withTeam($team);
-
+        return view('teamwork.create-event')->withTeam($team);
     }
 
 //     $existing_event = $event::where('team_id', $id->exists());
@@ -205,5 +200,4 @@ class TeamController extends Controller
 
         return redirect(route('teams.index'));
     }
-
 }
