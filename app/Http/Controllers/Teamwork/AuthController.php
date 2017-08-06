@@ -34,18 +34,18 @@ class AuthController extends Controller
 
     public function denyInvite($token)
     {
-       $invite = Teamwork::getInviteFromDenyToken($token);
+        $invite = Teamwork::getInviteFromDenyToken($token);
+
         if (!$invite) {
             abort(404);
         }
+
         if (auth()->check()) {
-            Teamwork::denyInvite( $invite );
+            Teamwork::denyInvite($invite);
             return redirect()->route('teams.index');
-         } else {
-           session(['invite_token' => $token]);
-            return redirect()->to('login');
         }
 
+        session(['invite_token' => $token]);
+        return redirect()->to('login');
     }
-
 }
