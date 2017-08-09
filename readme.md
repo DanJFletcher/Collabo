@@ -1,5 +1,5 @@
 ##  Collabo
-> **Collabo** lets team owners build their own teams and compete with other teams to rasie money for a *good cause.*
+> **Collabo** lets team owners build their own teams and compete with other teams to raise money for a *good cause.*
 
 
 <div style="text-align:center">
