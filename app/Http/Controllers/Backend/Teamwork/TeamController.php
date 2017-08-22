@@ -64,7 +64,7 @@ class TeamController extends Controller
 
         $request->user()->attachTeam($team);
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 
     /**
@@ -98,7 +98,7 @@ class TeamController extends Controller
             abort(403);
         }
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 
     public function seeTeam($id)
@@ -174,7 +174,7 @@ class TeamController extends Controller
         $team->name = $request->name;
         $team->save();
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 
     /**
@@ -198,6 +198,6 @@ class TeamController extends Controller
         $userModel::where('current_team_id', $id)
                     ->update(['current_team_id' => null]);
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 }

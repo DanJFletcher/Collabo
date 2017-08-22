@@ -7,7 +7,7 @@ Breadcrumbs::register('admin.donations', function ($breadcrumbs) {
     $breadcrumbs->push('Donations', route('admin.donations'));
 });
 Breadcrumbs::register('teams.index', function ($breadcrumbs) {
-    $breadcrumbs->push('Teams', route('teams.index'));
+    $breadcrumbs->push('Teams', route('admin.teams.index'));
 });
 Breadcrumbs::register('messenger.index', function ($breadcrumbs) {
     $breadcrumbs->push('Messenger', route('messenger.index'));

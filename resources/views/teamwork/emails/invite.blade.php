@@ -91,11 +91,11 @@ text-align: center; text-decoration: none; -webkit-text-size-adjust: none;',
                           $actionColor = 'button--blue';
                           $denyColor = 'button--red';
                           ?>
-                            <a href="{{route('teams.accept_invite', $invite->accept_token)}}"  style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
+                            <a href="{{route('admin.teams.accept_invite', $invite->accept_token)}}"  style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
                             class="button"
                             target="_blank">Accept Invite</a>
 
-                            <a href="{{route('teams.deny_invite', $invite->deny_token)}}"  style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$denyColor] }}"
+                            <a href="{{route('admin.teams.deny_invite', $invite->deny_token)}}"  style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$denyColor] }}"
                             class="button"
                             target="_blank">Deny Invite</a>
                         </td>

@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         if (auth()->check()) {
             Teamwork::acceptInvite($invite);
-            return redirect()->route('teams.index');
+            return redirect()->route('admin.teams.index');
         } else {
             session(['invite_token' => $token]);
             return redirect()->to('login');
@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         if (auth()->check()) {
             Teamwork::denyInvite($invite);
-            return redirect()->route('teams.index');
+            return redirect()->route('admin.teams.index');
         }
 
         session(['invite_token' => $token]);

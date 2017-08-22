@@ -53,7 +53,7 @@ class TeamMemberController extends Controller
 
         $user->detachTeam($team);
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 
 
@@ -67,7 +67,7 @@ class TeamMemberController extends Controller
 
         $user->detachTeam($team);
 
-        return redirect(route('teams.index'));
+        return redirect(route('admin.teams.index'));
     }
 
     /**
@@ -96,7 +96,7 @@ class TeamMemberController extends Controller
             ]);
         }
 
-        return redirect(route('teams.members.show', $team->id));
+        return redirect(route('admin.teams.members.show', $team->id));
     }
 
     /**
@@ -112,7 +112,7 @@ class TeamMemberController extends Controller
             $m->to($invite->email)->subject('Invitation to join team '.$invite->team->name);
         });
 
-        return redirect(route('teams.members.show', $invite->team));
+        return redirect(route('admin.teams.members.show', $invite->team));
     }
 
 }
