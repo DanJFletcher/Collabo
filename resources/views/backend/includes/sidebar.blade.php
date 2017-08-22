@@ -37,7 +37,7 @@
                     <span>{{ trans('menus.backend.sidebar.dashboard') }}</span> {{-- Name of link--}}
                 </a>
             </li>
-            
+
             <li class="{{ active_class(Active::checkUriPattern('admin/donations*')) }}"> {{-- Set Active--}}
                 <a href="{{ route('admin.donations') }}"> {{-- Route --}}
                     <i class="fa fa-money"></i> {{-- Icon --}}
@@ -46,19 +46,19 @@
             </li>
 
             <li class="{{ active_class(Active::checkUriPattern('admin/teams*')) }}"> {{-- Set Active--}}
-                <a href="{{route('teams.index')}}"> {{-- Route --}}
+                <a href="{{route('admin.teams.index')}}"> {{-- Route --}}
                     <i class="fa fa-users"></i> {{-- Icon --}}
                     <span>Teams</span> {{-- Name of link--}}
                 </a>
             </li>
-            
+
             <li class="{{ active_class(Active::checkUriPattern('admin/messaging*')) }}"> {{-- Set Active--}}
                 <a href="{{route('messenger.index')}}"> {{-- Route --}}
                     <i class="fa fa-comments"></i> {{-- Icon --}}
                     <span>Messaging</span> {{-- Name of link--}}
                 </a>
             </li>
-            
+
             <li class="{{ active_class(Active::checkUriPattern('admin/members*')) }}"> {{-- Set Active--}}
                 <a href="{{ route('admin.members.index') }}"> {{-- Route --}}
                     <i class="fa fa-user-circle-o"></i> {{-- Icon --}}
@@ -72,7 +72,7 @@
             @role(1)
             <li class="header">Admin</li>
 
-            
+
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
@@ -96,7 +96,7 @@
                     </li>
                 </ul>
             </li>
-            
+
              <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-list"></i>
@@ -131,7 +131,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/news*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/news*'), 'display: block;') }}">
-                    
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/news')) }}">
                         <a href="{{route('admin.news.index')}}">
                             <i class="fa fa-circle-o"></i>
@@ -145,11 +145,11 @@
                         </a>
                     </li>
 
-                    
+
                 </ul>
             </li>
-            
-       
+
+
 
             <li class="{{ active_class(Active::checkUriPattern('admin/events*')) }} treeview">
                 <a href="#">
@@ -158,15 +158,15 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu treeview-menu {{ active_class(Active::checkUriPattern('admin/events*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/events*'), 'display: block;') }}">
-                    
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/events')) }}">
                         <a href="{{route('admin.events.index')}}">
                             <i class="fa fa-circle-o"></i>
                             <span>View</span>
                         </a>
                     </li>
-                    
-                    
+
+
                     <li class="{{ active_class(Active::checkUriPattern('admin/events/create')) }}">
                         <a href="{{route('admin.events.create')}}">
                             <i class="fa fa-circle-o"></i>
@@ -174,7 +174,7 @@
                         </a>
                     </li>
 
-                    
+
                 </ul>
             </li>
 
@@ -229,7 +229,7 @@
 
             @endauth
 
-           
+
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>
