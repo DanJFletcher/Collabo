@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teamwork;
+namespace App\Http\Controllers\Backend\Teamwork;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
