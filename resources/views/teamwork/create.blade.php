@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create a new team</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="{{route('teams.store')}}">
+                        <form class="form-horizontal" method="post" action="{{route('admin.teams.store')}}">
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -30,7 +30,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-save"></i> Save
                                     </button>
-                                    <a href="{{route('teams.index')}}" class="btn btn-warning">
+                                    <a href="{{route('admin.teams.index')}}" class="btn btn-warning">
                                         <i class="fa fa-btn fa-ban"></i> Cancel
                                     </a>
                                 </div>

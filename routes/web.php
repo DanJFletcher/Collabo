@@ -36,26 +36,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 
 });
 
-
-/**
- * Teamwork routes
- */
-Route::group(['prefix' => 'admin/teams', 'namespace' => 'Teamwork', 'middleware' => 'admin'], function()
-{
-     includeRouteFiles(__DIR__.'/Backend/Team/');
-});
-
-/**
-* Members route
-*/
-
-Route::group(['prefix' => 'admin/members', 'namespace' => 'Backend', 'as' => 'admin.', 'middleware' => 'admin'], function()
-{
-     includeRouteFiles(__DIR__.'/Backend/Members/');
-});
-
-
-
 /**
  * Messenger routes
  */
