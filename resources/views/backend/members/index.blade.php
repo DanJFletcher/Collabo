@@ -45,7 +45,7 @@
 
                     <td>
                        <button onclick="email_user('{{$user->id}}')" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-xs"><i class="fa fa-envelope " aria-hidden="true"></i></button>
-                        <a href="{{route('admin.messages.read', ['id'=>$user->id])}}" class="btn btn-info btn-xs"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
+                        <a href="{{route('admin.conversations.show', ['id'=>$user->id])}}" class="btn btn-info btn-xs"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
 
 
                         </td>
