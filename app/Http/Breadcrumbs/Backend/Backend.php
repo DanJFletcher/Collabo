@@ -9,8 +9,8 @@ Breadcrumbs::register('admin.donations', function ($breadcrumbs) {
 Breadcrumbs::register('teams.index', function ($breadcrumbs) {
     $breadcrumbs->push('Teams', route('admin.teams.index'));
 });
-Breadcrumbs::register('messenger.index', function ($breadcrumbs) {
-    $breadcrumbs->push('Messenger', route('messenger.index'));
+Breadcrumbs::register('admin.messenger.index', function ($breadcrumbs) {
+    $breadcrumbs->push('Messenger', route('admin.messenger.index'));
 });
 Breadcrumbs::register('admin.members.index', function ($breadcrumbs) {
     $breadcrumbs->push('Members', route('admin.members.index'));
