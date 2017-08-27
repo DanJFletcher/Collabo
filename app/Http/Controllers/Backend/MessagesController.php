@@ -68,7 +68,7 @@ class MessagesController extends Controller
         }
     }
 
-    public function ajaxDeleteMessage(Request $request, $id)
+    public function delete(Request $request, $id)
     {
         if ($request->ajax()) {
             if (Talk::deleteMessage($id)) {
