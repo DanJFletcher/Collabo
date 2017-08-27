@@ -11,8 +11,8 @@ use View;
 
 class MessagesController extends Controller
 {
-
     protected $authUser;
+
     public function __construct()
     {
 
