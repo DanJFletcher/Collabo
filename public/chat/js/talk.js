@@ -10,7 +10,7 @@ $(document).ready(function () {
         e.preventDefault();
         var url, request, tag, data;
         tag = $(this);
-        url = __baseUrl + '/ajax/message/send';
+        url = __baseUrl + '/ajax/messages/send';
         data = tag.serialize();
 
         request = $.ajax({
@@ -35,7 +35,7 @@ $(document).ready(function () {
 
         tag = $(this);
         id = tag.data('message-id');
-        url = __baseUrl + '/ajax/message/delete/' + id;
+        url = __baseUrl + '/ajax/messages/delete/' + id;
 
         if(!confirm('Do you want to delete this message?')) {
             return false;
