@@ -1,10 +1,10 @@
 <?php
 
 Route::group([
-    'prefix'     => 'message',
+    'prefix'     => 'messages',
 ], function () {
 
 Route::get('/', 'MessagesController@index')->name('messages.index');
-Route::get('/{id}', 'MessagesController@chatHistory')->name('messages.read');
+Route::get('conversations/{id}', 'ConversationsController@show')->name('conversations.show');
 
 });
