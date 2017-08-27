@@ -48,7 +48,7 @@ class MessagesController extends Controller
         return view('backend.messages.conversations', compact('messages', 'user'));
     }
 
-    public function ajaxSendMessage(Request $request)
+    public function store(Request $request)
     {
         if ($request->ajax()) {
             $rules = [

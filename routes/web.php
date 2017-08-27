@@ -41,6 +41,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
  */
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::','namespace' => 'Backend','middleware' => 'admin'], function() {
-   Route::post('messages/send', 'MessagesController@ajaxSendMessage')->name('messages.new');
+   Route::post('messages/send', 'MessagesController@store')->name('messages.new');
    Route::delete('messages/delete/{id}', 'MessagesController@delete')->name('messages.delete');
 });
