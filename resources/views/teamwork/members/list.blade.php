@@ -33,7 +33,7 @@
 
                                             @endif
                                         @else
-                                        <a href="{{route('admin.message.read', ['id'=>$user->id])}}" class="btn btn-primary btn-sm"><i class="fa fa-commenting-o"></i> </a>
+                                        <a href="{{route('admin.messages.read', ['id'=>$user->id])}}" class="btn btn-primary btn-sm"><i class="fa fa-commenting-o"></i> </a>
                                         @endif
                                     </td>
                                 </tr>

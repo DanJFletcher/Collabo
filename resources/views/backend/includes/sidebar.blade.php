@@ -53,7 +53,7 @@
             </li>
 
             <li class="{{ active_class(Active::checkUriPattern('admin/messaging*')) }}"> {{-- Set Active--}}
-                <a href="{{route('admin.messenger.index')}}"> {{-- Route --}}
+                <a href="{{route('admin.messages.index')}}"> {{-- Route --}}
                     <i class="fa fa-comments"></i> {{-- Icon --}}
                     <span>Messaging</span> {{-- Name of link--}}
                 </a>

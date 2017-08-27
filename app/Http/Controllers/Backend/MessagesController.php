@@ -9,7 +9,7 @@ use Nahid\Talk\Facades\Talk;
 use Auth;
 use View;
 
-class MessengerController extends Controller
+class MessagesController extends Controller
 {
 
     protected $authUser;
@@ -30,7 +30,7 @@ class MessengerController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('backend.messenger.index', compact('users'));
+        return view('backend.messages.index', compact('users'));
     }
 
     public function chatHistory($id)

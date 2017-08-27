@@ -6,7 +6,7 @@
         @foreach($threads as $inbox)
             @if(!is_null($inbox->thread))
         <li class="clearfix">
-            <a href="{{route('admin.message.read', ['id'=>$inbox->withUser->id])}}">
+            <a href="{{route('admin.messages.read', ['id'=>$inbox->withUser->id])}}">
             <img src="{{$inbox->withUser->avatar}}" alt="avatar" />
             <div class="about">
                 <div class="name">{{$inbox->withUser->name}}</div>
