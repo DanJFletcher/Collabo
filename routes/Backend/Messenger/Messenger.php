@@ -5,6 +5,6 @@ Route::group([
 ], function () {
 
 Route::get('/', 'MessengerController@index')->name('messenger.index');
-Route::get('messaging/{id}', 'MessengerController@chatHistory')->name('message.read');
+Route::get('/{id}', 'MessengerController@chatHistory')->name('message.read');
 
 });
