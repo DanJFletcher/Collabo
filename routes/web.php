@@ -39,10 +39,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 /**
  * Messenger routes
  */
-Route::group(['prefix' => 'admin/messaging', 'namespace' => 'Backend', 'middleware' => 'admin'], function()
-{
-     includeRouteFiles(__DIR__.'/Backend/Messenger/');
-});
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::','namespace' => 'Backend','middleware' => 'admin'], function() {
    Route::post('message/send', 'MessengerController@ajaxSendMessage')->name('message.new');
