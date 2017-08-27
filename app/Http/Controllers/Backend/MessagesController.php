@@ -33,21 +33,6 @@ class MessagesController extends Controller
         return view('backend.messages.index', compact('users'));
     }
 
-    public function chatHistory($id)
-    {
-        $conversations = Talk::getMessagesByUserId($id);
-        $user = '';
-        $messages = [];
-        if (!$conversations) {
-            $user = User::find($id);
-        } else {
-            $user = $conversations->withUser;
-            $messages = $conversations->messages;
-        }
-
-        return view('backend.messages.conversations', compact('messages', 'user'));
-    }
-
     public function store(Request $request)
     {
         if ($request->ajax()) {
