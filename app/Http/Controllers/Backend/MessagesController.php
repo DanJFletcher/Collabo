@@ -62,7 +62,7 @@ class MessagesController extends Controller
             $userId = $request->input('_id');
 
             if ($message = Talk::sendMessageByUserId($userId, $body)) {
-                $html = view('backend.messenger.newMessageHtml', compact('message'))->render();
+                $html = view('backend.messages.newMessageHtml', compact('message'))->render();
                 return response()->json(['status'=>'success', 'html'=>$html], 200);
             }
         }
