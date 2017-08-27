@@ -15,6 +15,7 @@ class ConversationsController extends Controller
 
     /**
      * Conversations controller constructor.
+     *
      * @return void
      */
     public function __construct()
@@ -29,6 +30,13 @@ class ConversationsController extends Controller
             $view->with(compact('threads'));
         });
     }
+
+    /**
+     * Shows a conversation.
+     *
+     * @param int $id
+     * @return Illuminate\Http\Response
+     */
     public function show($id)
     {
         $conversations = Talk::getMessagesByUserId($id);
